@@ -15,7 +15,9 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10').then(res => this.setState({todos: res.data}))
+    axios
+      .get("https://jsonplaceholder.typicode.com/todos?_limit=10")
+      .then(res => this.setState({ todos: res.data }));
   }
 
   //Toggle Complete
@@ -33,15 +35,22 @@ class App extends React.Component {
   //Delete Todo
 
   delTodo = id => {
-    axios.delete('https://jsonplaceholder.typicode.com/todos/${id}').then(res => this.setState({
-      todos: [...this.state.todos.filter(todo => todo.id !== id)]
-    }));
+    axios.delete("https://jsonplaceholder.typicode.com/todos/${id}").then(res =>
+      this.setState({
+        todos: [...this.state.todos.filter(todo => todo.id !== id)]
+      })
+    );
   };
 
   //Add Todo
 
   addTodo = title => {
-    axios.post('https://jsonplaceholder.typicode.com/todos', { title: title, completed: false }).then(res => this.setState({ todos: [...this.state.todos, res.data] }));
+    axios
+      .post("https://jsonplaceholder.typicode.com/todos", {
+        title: title,
+        completed: false
+      })
+      .then(res => this.setState({ todos: [...this.state.todos, res.data] }));
   };
 
   render() {
@@ -50,8 +59,9 @@ class App extends React.Component {
         <div className="App">
           <div className="container">
             <Header />
-            <Route exact
-              path="/"
+            <Route
+              exact
+              path="/react_todo_app"
               render={props => (
                 <React.Fragment>
                   <AddTodo addTodo={this.addTodo} />
@@ -63,7 +73,7 @@ class App extends React.Component {
                 </React.Fragment>
               )}
             />
-            <Route path="/about" component={About} />
+            <Route path="/react_todo_app/about" component={About} />
           </div>
         </div>
       </Router>
